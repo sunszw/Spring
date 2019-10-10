@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <bean id="hello" class="com.study.HelloSpring"></bean>
+
+
+    <bean id="axe" class="com.study.Axe"></bean>
+    <bean id="saw" class="com.study.Saw"></bean>
+    <bean id="worker" class="com.study.Worker">
+        <property name="tools" ref="saw"></property>
+    </bean>
+
+    <bean id="base" class="com.study.BaseType">
+        <property name="age" value="25"></property>
+        <property name="price" value="15.9"></property>
+        <property name="time" value="3600000000000"></property>
+        <property name="size" value="99.999"></property>
+    </bean>
+
+    <bean id="complex" class="com.study.ComplexType">
+        <property name="arr">
+            <array>
+                <value>0</value>
+                <value>1</value>
+                <value>2</value>
+            </array>
+        </property>
+        <property name="names">
+            <array>
+                <value>Tom</value>
+                <value>Jerry</value>
+                <value>李大嘴</value>
+            </array>
+        </property>
+        <property name="cities">
+            <list>
+                <value>帝都</value>
+                <value>魔都</value>
+                <value>成都</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="Tom">
+                    <value>一只公猫</value>
+                </entry>
+                <entry key="Jerry">
+                    <value>一只老鼠</value>
+                </entry>
+            </map>
+        </property>
+        <property name="tools">
+            <list>
+                <ref bean="saw"/>
+                <ref bean="axe"/>
+                <bean class="com.study.Axe"></bean>
+            </list>
+        </property>
+    </bean>
+
+	<util:properties id="properties" location="classpath*:jdbc.properties"></util:properties>
+
+	<bean id="jdbc" class="com.study.JdbcBean">
+		<property name="url" value="#{jdbc.url}"></property>
+		<property name="driver" value="#{jdbc.url}"></property>
+		<property name="username" value="#{jdbc.username}"></property>
+		<property name="password" value="#{jdbc.password}"></property>
+	</bean>
+
+</beans>
